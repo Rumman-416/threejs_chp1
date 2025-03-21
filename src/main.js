@@ -42,8 +42,8 @@ scene.add(mesh);
 
 //sizes
 const sizes = {
-  width: 800,
-  height: 600,
+  width: window.innerWidth,
+  height: window.innerHeight,
 };
 
 //axis helper
@@ -73,6 +73,7 @@ renderer.render(scene, camera);
 //Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
+
 //Time
 let time = Date.now();
 
