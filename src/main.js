@@ -3,7 +3,37 @@ import * as THREE from "three";
 import * as dat from "dat.gui";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import gsap from "gsap";
-import { update } from "three/examples/jsm/libs/tween.module.js";
+
+//Textures
+// const image = new Image();
+// const texture = new THREE.Texture(image);
+
+// image.onload = () => {
+//   texture.needsUpdate = true;
+// };
+// image.src = "textures/wall.jpg";
+
+//Textures
+const loadingManager = new THREE.LoadingManager();
+loadingManager.onStart = () => {
+  console.log("onStart");
+};
+loadingManager.onLoad = () => {
+  console.log("onLoad");
+};
+loadingManager.onProgress = () => {
+  console.log("onProgress");
+};
+loadingManager.onError = () => {
+  console.log("onError");
+};
+
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const texture = textureLoader.load("textures/wall.jpg");
+// texture.repeat.x = 2;
+// texture.repeat.y = 2;
+// texture.wrapS = THREE.RepeatWrapping;
+// texture.wrapT = THREE.RepeatWrapping;
 
 //Debug
 console.log(dat);
@@ -35,7 +65,7 @@ const scene = new THREE.Scene();
 
 //object
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: parameters.color });
+const material = new THREE.MeshBasicMaterial({ map: texture });
 const mesh = new THREE.Mesh(geometry, material);
 mesh.position.set(0, 0, 0);
 // mesh.scale.x = 2;
